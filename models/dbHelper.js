@@ -14,7 +14,21 @@ const find = () => {
   return db('lessons')
 }
 
+const findById = (id) => {
+  return db('lessons')
+  .where({ id }) // full form { id : id }
+  .first()
+}
+
+const remove = (id) => {
+  return db('lessons')
+  .where({ id })
+  .del()
+}
+
 module.exports ={
   add,
-  find
+  find,
+  findById,
+  remove,
 }
