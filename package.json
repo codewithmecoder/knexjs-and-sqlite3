@@ -1,0 +1,28 @@
+{
+  "name": "knex_js_sqlite3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon sever.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codewithmecoder/knexjs-and-sqlite3.git"
+  },
+  "author": "Sokcheanith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codewithmecoder/knexjs-and-sqlite3/issues"
+  },
+  "homepage": "https://github.com/codewithmecoder/knexjs-and-sqlite3#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.4",
+    "sqlite3": "^5.0.0"
+  }
+}
