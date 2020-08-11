@@ -61,5 +61,38 @@ app.delete('/api/lessons/:id', (req, res) => {
   })
 })
 
+app.post('/api/lessons/:id/messages', (req, res) => {
+  const { id } = req.params
+  const msg = req.body
+
+  if(!msg.lesson_id){
+    msg['lesson_id'] = parseInt(id, 10)
+  }
+
+  Lesson.findById(id)
+  .then(lesson => {
+    if(!lesson){
+      res.status(404).json({ message: 'Invalid Id'})
+    }
+
+    if(!msg.sender || !msg.text){
+      res.status(400).json({ message: "Must Provide both Sender and Text"})
+    }
+
+    Lesson.addMessage(msg, id)
+    .then(message => {
+      if(message) {
+        res.status(200).json(message)
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: "Fail to add message"})
+    })
+  })
+  .catch(error => {
+    res.status(500).json({ message: 'Error findding message'})
+  })
+})
+
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
