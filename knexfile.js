@@ -22,7 +22,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './migration',
+      // directory: './migration',
       tablename: 'knex_migrations',
     },
   }
