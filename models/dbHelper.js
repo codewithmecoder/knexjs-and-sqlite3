@@ -4,8 +4,10 @@ const db = require('../dbConfig')
 // lessons table
 // add
 const add = async lesson => {
-  const [id] = await db('lessons').insert(lesson)
-  return id
+  return await db('lessons')
+    .insert(lesson, ['id', 'name'])
+  // const [id] = await db('lessons').insert(lesson)
+  // return id
 }
 
 const find = () => {
@@ -27,10 +29,14 @@ const remove = (id) => {
 // messages table
 // add
 const addMessage = async (message, lesson_id) => {
-  const [id] = await db('messages')
-  .where({ lesson_id }) // full form { lesson_id : lesson_id}
-  .insert(message)
-  return findMessageById(id)
+  // const [id] = await db('messages')
+  // .where({ lesson_id }) // full form { lesson_id : lesson_id}
+  // .insert(message)
+  // return findMessageById(id)
+
+  return await db('messages')
+    .where({ lesson_id })
+    .insert(message, ['id'])
 }
 
 // findMessageById
