@@ -41,6 +41,27 @@ const findMessageById = (id) => {
   .where({ id }) //full form { id : id }
   .first()
 }
+
+// findLessonMessages
+const findLessonMessages = (lesson_id) => {
+  return db('lessons as l')
+    .join('messages as m', 'l.id', 'm.lesson_id')
+    .select(
+      'l.id as L',
+      'l.name as LessonName',
+      'm.id as MessageId',
+      'm.sender',
+      'm.text'
+    )
+    .where( { lesson_id})
+  // .where({ lesson_id })
+}
+
+const removeMessage = id => {
+  return db('messages')
+  .where({ id })
+  .del()
+}
 module.exports ={
   add,
   find,
@@ -48,4 +69,6 @@ module.exports ={
   remove,
   addMessage,
   findMessageById,
+  findLessonMessages,
+  removeMessage,
 }
