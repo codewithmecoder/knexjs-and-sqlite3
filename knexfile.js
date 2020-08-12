@@ -13,5 +13,8 @@ module.exports = {
         conn.run("PRAGMA foreign_keys = ON", done)
       }
     }
+  },
+  production: {
+    
   }
 };
