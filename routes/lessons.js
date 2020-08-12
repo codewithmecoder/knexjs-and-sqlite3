@@ -19,7 +19,7 @@ route.post('/', (req, res) => {
     res.status(200).json(lesson)
   })
   .catch(error => {
-    res.status(500).json({message: "Can not add massages."})
+    res.status(500).json({message: "Can not add lessons."})
   })
 })
 
