@@ -6,8 +6,6 @@ const db = require('../dbConfig')
 const add = async lesson => {
   return await db('lessons')
     .insert(lesson, ['id', 'name'])
-  // const [id] = await db('lessons').insert(lesson)
-  // return id
 }
 
 const find = () => {
@@ -29,11 +27,6 @@ const remove = (id) => {
 // messages table
 // add
 const addMessage = async (message, lesson_id) => {
-  // const [id] = await db('messages')
-  // .where({ lesson_id }) // full form { lesson_id : lesson_id}
-  // .insert(message)
-  // return findMessageById(id)
-
   return await db('messages')
     .where({ lesson_id })
     .insert(message, ['id'])
@@ -66,6 +59,25 @@ const removeMessage = id => {
   .where({ id })
   .del()
 }
+
+
+// users table
+// add user
+
+const addUsers = async (user) => {
+  return db('users')
+    .insert(user, ['id', 'username'])
+}
+// findAllUsers
+const findAllUsers = () => {
+  return db('users')
+}
+// findUsersByUsername
+const findUsersByUsername = (username) => {
+  return db('users')
+    .where({ username })
+    .first()
+}
 module.exports ={
   add,
   find,
@@ -75,4 +87,7 @@ module.exports ={
   findMessageById,
   findLessonMessages,
   removeMessage,
+  addUsers,
+  findAllUsers,
+  findUsersByUsername,
 }

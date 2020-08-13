@@ -10,6 +10,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/lessons', require('../routes/lessons'))
 app.use('/api/messages', require('../routes/messages'))
-
+app.use('/api/users', require('../routes/users'))
 
 module.exports = app
