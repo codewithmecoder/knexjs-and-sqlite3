@@ -32,6 +32,7 @@ route.post('/register', (req, res) => {
     })
   }else{
     Lesson.findUsersByUsername(username)
+    Lesson.findOne(email)
     .then(user => {
       if(user){
         errors.push({ msg: 'Username or Email is already taken' })
@@ -77,7 +78,7 @@ route.post('/login', (req, res) => {
         email: user.email
       }
 
-      res.render('dashboard')
+      res.redirect('/dashboard')
     }else{
       res.status(404).json({ message: "Invalid username or password"})
     }

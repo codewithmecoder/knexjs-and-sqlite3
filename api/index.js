@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 // Dashboard page
 app.get('/dashboard', restricted,(req, res) => {
   res.render('dashboard',{
-    name : req.user.name
+    username : req.session.user.username
   })
 })
 
