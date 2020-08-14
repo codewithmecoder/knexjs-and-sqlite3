@@ -77,7 +77,7 @@ route.post('/login', (req, res) => {
         email: user.email
       }
 
-      res.status(200).json({ message: `Welcome ${user.username}`})
+      res.render('dashboard')
     }else{
       res.status(404).json({ message: "Invalid username or password"})
     }
