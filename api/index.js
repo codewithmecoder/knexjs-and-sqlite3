@@ -2,6 +2,8 @@ const express = require('express')
 const session = require('express-session')
 require('dotenv').config()
 const restricted = require('../auth/restricted')
+const expressLayouts = require('express-ejs-layouts')
+const flash = require('connect-flash')
 const app = express()
 
 const sessionConfig = {
@@ -15,13 +17,35 @@ const sessionConfig = {
   resave: false,
   saveUnitialized: true, // for production set it to false acording to GDPR laws users have to give consent
 }
+// EJS
+app.use(expressLayouts)
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
+// bodyParser
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(session(sessionConfig))
 
+// connect flash
+app.use(flash())
+
+// global vars
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.error_msg = req.flash('error_msg')
+  res.locals.error = req.flash('error')
+  next()
+})
 
 app.get('/', (req, res) => {
-  res.json({message: "Hello from me"})
+  res.render('mainpage')
+})
+// Dashboard page
+app.get('/dashboard', restricted,(req, res) => {
+  res.render('dashboard',{
+    name : req.user.name
+  })
 })
 
 app.use('/api/auth', require('../auth/authen'))

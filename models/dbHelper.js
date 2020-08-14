@@ -78,6 +78,13 @@ const findUsersByUsername = (username) => {
     .where({ username })
     .first()
 }
+
+// findOne
+// const findOne = () => {
+//   return db('users')
+//     .where({ findone })
+//     .first()
+// }
 module.exports ={
   add,
   find,
@@ -90,4 +97,5 @@ module.exports ={
   addUsers,
   findAllUsers,
   findUsersByUsername,
+  // findOne,
 }
