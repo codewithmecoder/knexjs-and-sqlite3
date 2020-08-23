@@ -1,0 +1,14 @@
+@import './sharedFile/lessons.css';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100% !important;
+  left: 0;
+  z-index: 20;
+}
+.dash_name{
+  display: flex;
+  justify-content: space-between;
+}

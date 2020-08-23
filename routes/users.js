@@ -18,6 +18,7 @@ route.get('/:username', (req, res) => {
   .then(user => {
     if(user){
       res.status(200).json(user)
+      
     }else{
       res.status(404).json({ message: `User name '${username}' not found`})
     }

@@ -5,23 +5,30 @@ const route = express.Router()
 route.get('/', (req, res) => {
   Lesson.find()
   .then(lessons => {
-    res.status(200).json(lessons)
+    const lesson = lessons
+    res.render('lessons', {
+      lesson,
+   })
   })
   .catch(error => {
     res.status(500).json({message: 'Lessons not found'})
   })
-  
 })
 
-route.post('/', (req, res) => {
+route.get('/add', (req, res) => {
+  res.render('addLessons')
+})
+
+route.post('/add', (req, res) => {
   Lesson.add(req.body)
   .then(lesson => {
-    res.status(200).json(lesson)
+    res.redirect('/api/lessons')
   })
   .catch(error => {
     res.status(500).json({message: "Can not add lessons."})
   })
 })
+
 
 route.get('/:id', (req, res) => {
   const { id } = req.params
@@ -39,21 +46,21 @@ route.get('/:id', (req, res) => {
   })
 })
 
-route.delete('/:id', (req, res) => {
-  const { id } = req.params
+// route.delete('/:id', (req, res) => {
+//   const { id } = req.params
   
-  Lesson.remove(id)
-  .then(count => {
-    if(count > 0){
-      res.status(200).json({message: "Successfully deleted lesson"})
-    }else{
-      res.status(404).json({message: "Can not find lesson to delete"})
-    }
-  })
-  .catch(error => {
-    res.status(500).json({message: "Unable to delete"})
-  })
-})
+//   Lesson.remove(id)
+//   .then(count => {
+//     if(count > 0){
+//       res.status(200).json({message: "Successfully deleted lesson"})
+//     }else{
+//       res.status(404).json({message: "Can not find lesson to delete"})
+//     }
+//   })
+//   .catch(error => {
+//     res.status(500).json({message: "Unable to delete"})
+//   })
+// })
 
 route.post('/:id/messages', (req, res) => {
   const { id } = req.params
@@ -76,7 +83,7 @@ route.post('/:id/messages', (req, res) => {
     Lesson.addMessage(msg, id)
     .then(message => {
       if(message) {
-        res.status(200).json(message)
+        res.redirect(`/api/lessons/${id}/messages`,)
       }
     })
     .catch(error => {
@@ -92,12 +99,17 @@ route.get('/:id/messages', (req, res) => {
   const { id } = req.params
 
   Lesson.findLessonMessages(id)
-  .then(lessons => {
-    res.status(200).json(lessons)
+  .then(message => {
+    const messages = message
+    res.render('Messages',{
+      id,
+      messages,
+    })
   })
   .catch(error => {
     res.status(500).json({ message: "Error retreiving message"})
   })
+  
 })
 
 module.exports = route

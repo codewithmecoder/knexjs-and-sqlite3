@@ -4,6 +4,8 @@ exports.up = function(knex) {
     tbl.increments()
     tbl.text('name', 128)
       .notNullable()
+      tbl.text('langauge', 128)
+      .notNullable()
     tbl.timestamps(true, true)
   })
   .createTable('messages', tbl => {

@@ -15,7 +15,7 @@ const sessionConfig = {
     httpOnly: true, // true means no access from js
   },
   resave: false,
-  saveUnitialized: true, // for production set it to false acording to GDPR laws users have to give consent
+  saveUninitialized: true, // for production set it to false acording to GDPR laws users have to give consent
 }
 // EJS
 app.use(expressLayouts)

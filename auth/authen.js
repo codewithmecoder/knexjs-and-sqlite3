@@ -57,8 +57,6 @@ route.post('/register', (req, res) => {
       }
     })
   }
-
-  
 })
 
 
@@ -94,11 +92,12 @@ route.get('/logout', (req, res) => {
       if(error){
         res.status(500).json({ message: "You can check out anytime you like, but you can never leave"})
       }else{
-        res.status(200).json({ message: "You logged out"})
+        res.redirect('/api/auth/login')
       }
     })
   }else{
     res.status(200).json({ message: "Not Logged in"})
   }
 })
+
 module.exports = route

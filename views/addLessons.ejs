@@ -1,0 +1,28 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3"> Homework</h1> 
+      <form action="/api/lessons/add" method="POST">
+        <div class="form-group">
+          <label for="addhomework">Add Homework</label>
+          <input 
+            type="text"
+            id="addhomework"
+            name="name"
+            class="form-control"
+            placeholder="Homework Title..."
+            >
+            <br>
+            <input 
+            type="text"
+            id="langauge"
+            name="langauge"
+            class="form-control"
+            placeholder="langauge..."
+            >
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create homework</button>
+      </form>
+    </div>
+  </div>
+</div>
