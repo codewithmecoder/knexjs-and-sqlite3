@@ -56,6 +56,9 @@ route.post('/register', (req, res) => {
         res.redirect('/api/auth/login')
       }
     })
+    .catch(err => {
+      res.status(500).json(err)
+    })
   }
 })
 
@@ -63,7 +66,9 @@ route.post('/register', (req, res) => {
 route.post('/login', (req, res) => {
   const { username, password } = req.body
   if(!(username && password)){
-    return res.status(400).json({ message: "Username and password are require" })
+    // return res.status(400).json({ message: "Username and password are require" })
+    req.flash('error_msg','Username and password are require')
+    res.redirect('/api/auth/login')
   }
   
   Lesson.findUsersByUsername(username)
@@ -77,8 +82,10 @@ route.post('/login', (req, res) => {
       }
 
       res.redirect('/dashboard')
+      
     }else{
-      res.status(404).json({ message: "Invalid username or password"})
+      req.flash('error_msg','Invalid Password or Username')
+      res.redirect('/api/auth/login')
     }
   })
   .catch(error => {
